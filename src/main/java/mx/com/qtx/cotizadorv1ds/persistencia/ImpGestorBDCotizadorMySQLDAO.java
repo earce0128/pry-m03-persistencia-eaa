@@ -568,23 +568,4 @@ public class ImpGestorBDCotizadorMySQLDAO implements IGestorBDCotizador {
         }
         return detalles;
 	}
-
-	@Override
-	public DetalleCotizacion insertarDetalleCotizacion(DetalleCotizacion detalle) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void actualizarDetalleCotizacion(DetalleCotizacion detalle) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean eliminarDetetallePorCotizacion(Long idCotizacion) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

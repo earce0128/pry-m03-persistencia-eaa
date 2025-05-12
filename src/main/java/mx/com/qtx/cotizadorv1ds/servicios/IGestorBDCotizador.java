@@ -41,7 +41,4 @@ public interface IGestorBDCotizador {
     // Métodos para Detalles de Cotizacion
     //DetalleCotizacion obtenerDetalleCotizacion(Long idCotizacion, String idComponente) throws SQLException;
     List<DetalleCotizacion> obtenerDetallesPorCotizacion(Long idCotizacion) throws SQLException;
-    DetalleCotizacion insertarDetalleCotizacion(DetalleCotizacion detalle) throws SQLException;
-    void actualizarDetalleCotizacion(DetalleCotizacion detalle) throws SQLException;
-    boolean eliminarDetetallePorCotizacion(Long idCotizacion) throws SQLException;
 }
