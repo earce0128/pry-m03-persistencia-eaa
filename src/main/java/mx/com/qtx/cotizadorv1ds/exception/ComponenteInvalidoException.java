@@ -1,6 +1,6 @@
-package mx.com.qtx.cotizadorv1ds.core;
+package mx.com.qtx.cotizadorv1ds.exception;
 
-import mx.com.qtx.cotizadorv1ds.core.componentes.Componente;
+import mx.com.qtx.cotizadorv1ds.componentes.Componente;
 
 public class ComponenteInvalidoException extends Exception {
 	/**

@@ -1,4 +1,4 @@
-package mx.com.qtx.cotizadorv1ds.core.componentes;
+package mx.com.qtx.cotizadorv1ds.componentes;
 
 import java.math.BigDecimal;
 
@@ -8,6 +8,5 @@ public abstract class ComponenteSimple extends Componente{
 			BigDecimal precioBase) {
 		super(id, descripcion, marca, modelo, costo, precioBase);
 	}
-
 
 }

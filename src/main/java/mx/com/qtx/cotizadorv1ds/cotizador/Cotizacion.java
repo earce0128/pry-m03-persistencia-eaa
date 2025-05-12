@@ -1,4 +1,4 @@
-package mx.com.qtx.cotizadorv1ds.core;
+package mx.com.qtx.cotizadorv1ds.cotizador;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,6 +25,14 @@ public class Cotizacion {
 	
 	public void agregarDetalle(DetalleCotizacion detI) {
 		this.detalles.put(detI.getNumDetalle(), detI);
+	}
+	
+	public Map<Integer, DetalleCotizacion> getDetalles() {
+		return detalles;
+	}
+
+	public void setDetalles(Map<Integer, DetalleCotizacion> detalles) {
+		this.detalles = detalles;
 	}
 
 	public long getNum() {
@@ -56,14 +64,14 @@ public class Cotizacion {
 		for(Integer k:this.detalles.keySet()) {
 			this.desplegarLineaCotizacion(this.detalles.get(k));
 		}
-		System.out.printf("\n%72s","Total:$" + String.format("%8.2f",this.getTotal()));
+		System.out.printf("\n%117s","Total:$" + String.format("%8.2f",this.getTotal()));
 		
 	}
 	
 	protected void desplegarLineaCotizacion(DetalleCotizacion detI) {
 		System.out.println(String.format("%3d",detI.getCantidad()) + " " 
 							+ String.format("Categoría:%-20s", detI.getCategoria()) 
-							+ String.format("%-20s", detI.getDescripcion())
+							+ String.format("%-35s", detI.getDescripcion())
 							+ " con precio base de $" + String.format("%8.2f",detI.getPrecioBase())
 							+ " cuesta(n) " + String.format("%8.2f",detI.getImporteCotizado()));
 	}

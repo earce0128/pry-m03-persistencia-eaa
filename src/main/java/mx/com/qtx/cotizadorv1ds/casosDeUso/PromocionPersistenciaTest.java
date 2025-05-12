@@ -1,30 +1,41 @@
-package mx.com.qtx.cotizadorv1ds.promos;
+package mx.com.qtx.cotizadorv1ds.casosDeUso;
 
-import java.math.BigDecimal;
-import java.util.List;
+import java.sql.SQLException;
 import java.util.Map;
 
 import mx.com.qtx.cotizadorv1ds.componentes.Componente;
 import mx.com.qtx.cotizadorv1ds.config.Config;
 import mx.com.qtx.cotizadorv1ds.cotizador.Cotizacion;
+import mx.com.qtx.cotizadorv1ds.persistencia.ImpGestorBDCotizadorMySQLDAO;
+import mx.com.qtx.cotizadorv1ds.promos.PromDsctoPlano;
+import mx.com.qtx.cotizadorv1ds.promos.PromDsctoXcantidad;
+import mx.com.qtx.cotizadorv1ds.promos.PromNXM;
+import mx.com.qtx.cotizadorv1ds.promos.PromSinDescto;
+import mx.com.qtx.cotizadorv1ds.promos.Promocion;
+import mx.com.qtx.cotizadorv1ds.promos.PromocionBuilder;
 import mx.com.qtx.cotizadorv1ds.servicios.ICotizador;
+import mx.com.qtx.cotizadorv1ds.servicios.IGestorBDCotizador;
 
-public class PromocionTest {
+public class PromocionPersistenciaTest {
+	
+	private static IGestorBDCotizador gestorBD = new ImpGestorBDCotizadorMySQLDAO();
+	
 	private static Map<Integer, Double> mapDsctos = Map.of(0,  0.0,
 			   3,  5.0,
 			   6, 10.0,
 			   9, 12.0);
 
 	public static void main(String[] args) {
-		testGenerarCotizacion();
+		testGenerarCotizacionPersistencia();
 
 	}
-	private static void testGenerarCotizacion() {
+	private static void testGenerarCotizacionPersistencia() {
+		
+		try {
 		
 		ICotizador cotizador = getCotizadorActual();
 		
-		Componente monitor = Componente.crearMonitor("M001","Monitor 17 pulgadas","Samsung","Goliat-500",
-						new BigDecimal(1000), new BigDecimal(2000));
+		Componente monitor = gestorBD.obtenerMonitor("MON-0004");
 		
 		Promocion promoMonitor = getPromo_2x1_mas_5_mas_10();
 		Promocion.mostrarEstructuraPromocion(promoMonitor);
@@ -32,43 +43,40 @@ public class PromocionTest {
 		monitor.setPromo(promoMonitor);
 		cotizador.agregarComponente(10, monitor);
 
-		Componente monitor2 = Componente.crearMonitor("M022","Monitor 15 pulgadas","Sony","VR-30",
-				new BigDecimal(1100), new BigDecimal(2000));
+		Componente monitor2 = gestorBD.obtenerMonitor("MON-0001");
 		
 		monitor2.setPromo(Promocion.getBuilder()
 				                   .conPromocionBaseSinDscto()
 				                   .agregarDsctoXcantidad(mapDsctos)
 				                   .build());
 		cotizador.agregarComponente(4, monitor2);
-		cotizador.agregarComponente(7, monitor2);
 		
-		Componente disco = Componente.crearDiscoDuro("D-23", "Disco estado sólido", "Seagate", "T-455", new BigDecimal(500), 
-				new BigDecimal(1000), "2TB");
-
+		Componente disco = gestorBD.obtenerDiscoDuro("DD-0003");
 		cotizador.agregarComponente(10, disco);
 	
-	    Componente tarjeta = Componente.crearTarjetaVideo("C0XY", "Tarjeta THOR", "TechBrand", "X200-34", 
-	            new BigDecimal("150.00"), new BigDecimal("300.00"), "8GB");
+	    Componente tarjeta = gestorBD.obtenerTarjetaVideo("TVID-0005"); 
+	    		
 	    tarjeta.setPromo(Promocion.getBuilder().conPromocionBaseNXM(3, 2).build());
 		cotizador.agregarComponente(10, tarjeta);
 	    
-    	Componente discoPc = Componente.crearDiscoDuro("D001", "Disco Seagate", "TechXYZ", "X200", 
-                new BigDecimal("1880.00"), new BigDecimal("2000.00"), "1TB");   
-	   	Componente monitorPc = Componente.crearMonitor("M001", "Monitor 17 pulgadas", "Sony", "Z9000", 
-	            new BigDecimal("3200.00"), new BigDecimal("6000.00"));   
-	    Componente tarjetaPc = Componente.crearTarjetaVideo("C001", "Tarjeta XYZ", "TechBrand", "X200", 
-	            new BigDecimal("150.00"), new BigDecimal("200.00"), "16GB");
-	    
-		Componente miPc = Componente.crearPc("pc0001", "Laptop 15000 s300", "Dell", "Terminator",
-												List.of(discoPc,monitorPc,tarjetaPc));
+		Componente miPc = gestorBD.obtenerPC("PC-0003"); 
+    	
 		miPc.setPromo(Promocion.getBuilder()
 				                   .conPromocionBaseSinDscto()
 				                   .agregarDsctoPlano(30f)
 				                   .agregarDsctoPlano(20f)
 				                   .build());
 		cotizador.agregarComponente(1, miPc);
+
 		Cotizacion cotizacion = cotizador.generarCotizacion();
+		cotizacion = gestorBD.insertarCotizacion(cotizacion);
 		cotizacion.emitirComoReporte();
+		
+		} catch (SQLException e) {
+			System.err.println("Error durante las pruebas de insertar cotizacion: " + e.getMessage());
+		} catch (Exception e) {
+			System.err.println("Error durante las pruebas de insertar cotizacion: " + e.getMessage());
+		} 
 	}
 	
 	private static Promocion getPromo_SinDscto() {

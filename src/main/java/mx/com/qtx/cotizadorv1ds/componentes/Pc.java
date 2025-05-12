@@ -1,4 +1,4 @@
-package mx.com.qtx.cotizadorv1ds.core.componentes;
+package mx.com.qtx.cotizadorv1ds.componentes;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,10 +10,10 @@ public class Pc extends Componente {
 
 	protected Pc(String id, String descripcion, String marca, String modelo, 
 			List<ComponenteSimple> subComponentes) {
-		super(id, descripcion, marca, modelo, new BigDecimal(0), new BigDecimal(0));
-		this.subComponentes = subComponentes;
-		this.setPrecioBase(this.calcularPrecioComponenteAgregado(0));
-		this.setCosto(this.calcularCostoComponenteAgregado(0));
+			super(id, descripcion, marca, modelo, new BigDecimal(0), new BigDecimal(0));
+			this.subComponentes = subComponentes;
+			this.setPrecioBase(this.calcularPrecioComponenteAgregado(0));
+			this.setCosto(this.calcularCostoComponenteAgregado(0));
 	}
 	
 	protected Pc(PcBuilder config) {
@@ -30,11 +30,6 @@ public class Pc extends Componente {
 		this.setCosto(this.calcularCostoComponenteAgregado(0));
 	}
 
-//	@Override
-//	public BigDecimal cotizar(int cantidadI) {
-//		return this.calcularPrecioComponenteAgregado(cantidadI);
-//	}
-	
 	@Override
 	public BigDecimal getPrecioBase() {
         BigDecimal total = BigDecimal.ZERO;
@@ -43,8 +38,8 @@ public class Pc extends Componente {
         		continue;
             total = total.add(c.getPrecioBase());
         }
-        return total.multiply( new BigDecimal(1).subtract( new BigDecimal(DSCTO_PRECIO_AGREGADO).divide(new BigDecimal(100)) )
-	             );
+        return total.multiply( new BigDecimal(1).subtract( new BigDecimal(DSCTO_PRECIO_AGREGADO)
+        		    .divide(new BigDecimal(100))));
 	}
 	
     private BigDecimal calcularPrecioComponenteAgregado(int cantidadI) {
@@ -70,6 +65,14 @@ public class Pc extends Componente {
         }
         return costoPc;
     }
+    
+	public List<ComponenteSimple> getSubComponentes() {
+		return subComponentes;
+	}
+
+	public void setSubComponentes(List<ComponenteSimple> subComponentes) {
+		this.subComponentes = subComponentes;
+	}
 
 	@Override
 	public String getCategoria() {
@@ -92,7 +95,7 @@ public class Pc extends Componente {
 		                   		             System.out.println();});
 		System.out.println("==== Tarjeta(s) de Video ====");
 		this.subComponentes.stream()
-		                   .filter(scI->scI instanceof Monitor)
+		                   .filter(scI->scI instanceof TarjetaVideo)
 		                   .forEach(tarI-> { tarI.mostrarCaracteristicas(); 
 		                   		             System.out.println();});
 	}

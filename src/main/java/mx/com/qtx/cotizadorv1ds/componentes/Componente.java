@@ -1,11 +1,13 @@
-package mx.com.qtx.cotizadorv1ds.core.componentes;
+package mx.com.qtx.cotizadorv1ds.componentes;
 import java.math.BigDecimal;
 import java.util.List;
+
+import mx.com.qtx.cotizadorv1ds.servicios.IPromocion;
 
 //import mx.com.qtx.cotizadorv1ds.promos.Promocion;
 
 public abstract class Componente {
-    protected String id;
+	protected String id;
     protected String descripcion;
     protected String marca;
     protected String modelo;
@@ -17,8 +19,8 @@ public abstract class Componente {
     // Constructor
     public Componente(String id, String descripcion, String marca, String modelo, 
                      BigDecimal costo, BigDecimal precioBase) {
-        this.id = id;
-        this.descripcion = descripcion;
+    	this.id = id;
+    	this.descripcion = descripcion;
         this.marca = marca;
         this.modelo = modelo;
         this.costo = costo;
@@ -44,7 +46,6 @@ public abstract class Componente {
     public BigDecimal getPrecioBase() { return precioBase; }
     public void setPrecioBase(BigDecimal precioBase) { this.precioBase = precioBase; }
 
-
 	public IPromocion getPromo() {
 		return promo;
 	}
@@ -63,7 +64,7 @@ public abstract class Componente {
         System.out.println("Costo: $" + costo);
         System.out.println("Precio Base: $" + precioBase);
         System.out.println("Utilidad: " + this.calcularUtilidad());
-               
+        System.out.println();
     }
 
     public BigDecimal calcularUtilidad() {
@@ -97,7 +98,7 @@ public abstract class Componente {
 	}
 
 	public static Componente crearPc(String id, String descripcion, String marca, String modelo, 
-			List<Componente> subComponentes) {
+		List<Componente> subComponentes) {
 		List<ComponenteSimple> lstDispositivos = subComponentes.stream()
 				                                          .filter(cmpI->(cmpI instanceof ComponenteSimple))
 		                                                  .map(dispI -> (ComponenteSimple) dispI)
@@ -108,12 +109,11 @@ public abstract class Componente {
 	public static PcBuilder getPcBuilder() {
 		return new PcBuilder();
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Componente [id=" + id + ", descripcion=" + descripcion + ", marca=" + marca + ", modelo=" + modelo
 				+ ", costo=" + costo + ", precioBase=" + precioBase + "]";
 	}
-	
 	
 }

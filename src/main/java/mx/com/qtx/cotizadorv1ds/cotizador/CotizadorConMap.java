@@ -1,14 +1,12 @@
-package mx.com.qtx.cotizadorv1ds.cotizadorB;
+package mx.com.qtx.cotizadorv1ds.cotizador;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-import mx.com.qtx.cotizadorv1ds.core.ComponenteInvalidoException;
-import mx.com.qtx.cotizadorv1ds.core.Cotizacion;
-import mx.com.qtx.cotizadorv1ds.core.DetalleCotizacion;
-import mx.com.qtx.cotizadorv1ds.core.ICotizador;
-import mx.com.qtx.cotizadorv1ds.core.componentes.Componente;
+import mx.com.qtx.cotizadorv1ds.componentes.Componente;
+import mx.com.qtx.cotizadorv1ds.exception.ComponenteInvalidoException;
+import mx.com.qtx.cotizadorv1ds.servicios.ICotizador;
 
 public class CotizadorConMap implements ICotizador {
 	private Map<Componente,Integer> mapCompsYcants;
@@ -29,8 +27,8 @@ public class CotizadorConMap implements ICotizador {
     	   Componente llave = this.mapCompsYcants.keySet()
     			                    .stream()
     			                    .filter(k->k.getId().equals(idComponente))
-    			                     .findFirst()
-    			                     .get();
+    			                    .findFirst()
+    			                    .get();
                
 		
     	   this.mapCompsYcants.remove(llave);

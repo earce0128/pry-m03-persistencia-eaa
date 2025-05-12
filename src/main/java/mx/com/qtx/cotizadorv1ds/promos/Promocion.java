@@ -3,7 +3,7 @@ package mx.com.qtx.cotizadorv1ds.promos;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import mx.com.qtx.cotizadorv1ds.core.componentes.IPromocion;
+import mx.com.qtx.cotizadorv1ds.servicios.IPromocion;
 
 /**
  * @author hp835

@@ -1,15 +1,13 @@
-package mx.com.qtx.cotizadorv1ds.cotizadorA;
+package mx.com.qtx.cotizadorv1ds.cotizador;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.com.qtx.cotizadorv1ds.core.ComponenteInvalidoException;
-import mx.com.qtx.cotizadorv1ds.core.Cotizacion;
-import mx.com.qtx.cotizadorv1ds.core.DetalleCotizacion;
-import mx.com.qtx.cotizadorv1ds.core.ICotizador;
-import mx.com.qtx.cotizadorv1ds.core.componentes.Componente;
+import mx.com.qtx.cotizadorv1ds.componentes.Componente;
+import mx.com.qtx.cotizadorv1ds.exception.ComponenteInvalidoException;
+import mx.com.qtx.cotizadorv1ds.servicios.ICotizador;
 
-public class Cotizador implements ICotizador{
+public class Cotizador implements ICotizador {
     private List<Componente> componentes = new ArrayList<>();
     private List<Integer> cantidades = new ArrayList<>();
 
@@ -21,7 +19,7 @@ public class Cotizador implements ICotizador{
 
     public void eliminarComponente(String idComponente) throws ComponenteInvalidoException {
     	if(idComponente == null) {
-    		throw new ComponenteInvalidoException("Id del componente es nulo ", null);
+    		throw new ComponenteInvalidoException("Id del componente no debe ser coero ", null);
     	}
     	int i = this.componentes.stream().map(compI->compI.getId())
     			                         .toList().indexOf(idComponente);

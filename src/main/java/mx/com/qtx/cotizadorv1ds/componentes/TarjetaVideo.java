@@ -1,4 +1,4 @@
-package mx.com.qtx.cotizadorv1ds.core.componentes;
+package mx.com.qtx.cotizadorv1ds.componentes;
 
 import java.math.BigDecimal;
 
@@ -19,13 +19,16 @@ public class TarjetaVideo extends ComponenteSimple {
 		this.memoria = memoria;
 	}
 	
-//	public BigDecimal cotizar(int cantidadI) {
-//		return PromocionUtil.calcularPrecioPromocion3X2(cantidadI, this.precioBase);
-//	}
-
 	@Override
 	public String getCategoria() {
 		return "Tarjeta de Video";
+	}
+	
+	@Override
+	public void mostrarCaracteristicas() {
+		super.mostrarCaracteristicas();
+        System.out.println("Memoria: " + this.memoria);
+		
 	}
 	
 }
