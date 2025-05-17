@@ -3,9 +3,9 @@ package mx.com.qtx.cotizadorv1ds.servicios;
 import java.sql.SQLException;
 import java.util.List;
 
-import mx.com.qtx.cotizadorv1ds.componentes.Componente;
-import mx.com.qtx.cotizadorv1ds.cotizador.Cotizacion;
-import mx.com.qtx.cotizadorv1ds.cotizador.DetalleCotizacion;
+import mx.com.qtx.cotizadorv1ds.core.componentes.Componente;
+import mx.com.qtx.cotizadorv1ds.core.cotizaciones.Cotizacion;
+import mx.com.qtx.cotizadorv1ds.core.cotizaciones.DetalleCotizacion;
 
 public interface IGestorBDCotizador {
 

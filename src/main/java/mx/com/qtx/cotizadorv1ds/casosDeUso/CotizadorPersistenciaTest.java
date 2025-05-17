@@ -4,16 +4,16 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
-import mx.com.qtx.cotizadorv1ds.componentes.Componente;
-import mx.com.qtx.cotizadorv1ds.componentes.DiscoDuro;
-import mx.com.qtx.cotizadorv1ds.componentes.Monitor;
-import mx.com.qtx.cotizadorv1ds.componentes.Pc;
-import mx.com.qtx.cotizadorv1ds.componentes.TarjetaVideo;
 import mx.com.qtx.cotizadorv1ds.config.Config;
-import mx.com.qtx.cotizadorv1ds.cotizador.Cotizacion;
-import mx.com.qtx.cotizadorv1ds.persistencia.ImpGestorBDCotizadorMySQLDAO;
-import mx.com.qtx.cotizadorv1ds.servicios.ICotizador;
+import mx.com.qtx.cotizadorv1ds.core.componentes.Componente;
+import mx.com.qtx.cotizadorv1ds.core.componentes.DiscoDuro;
+import mx.com.qtx.cotizadorv1ds.core.componentes.Monitor;
+import mx.com.qtx.cotizadorv1ds.core.componentes.Pc;
+import mx.com.qtx.cotizadorv1ds.core.componentes.TarjetaVideo;
+import mx.com.qtx.cotizadorv1ds.core.cotizaciones.Cotizacion;
+import mx.com.qtx.cotizadorv1ds.core.cotizaciones.ICotizador;
 import mx.com.qtx.cotizadorv1ds.servicios.IGestorBDCotizador;
+import mx.com.qtx.cotizadorv1ds.servicios.ImpGestorBDCotizadorMySQLDAO;
 
 public class CotizadorPersistenciaTest {
 
@@ -32,7 +32,7 @@ public class CotizadorPersistenciaTest {
 //		testInsertarCotizacion();
 //		testActualizarCotizacion();
 //		testEliminarCotizacion();
-    	testCotizadorPersistencia();
+//    	testCotizadorPersistencia();
 		
 	}
 

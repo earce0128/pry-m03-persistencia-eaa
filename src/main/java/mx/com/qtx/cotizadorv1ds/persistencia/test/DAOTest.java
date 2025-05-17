@@ -4,14 +4,14 @@ import java.time.LocalDate;
 import java.sql.SQLException;
 import java.util.List;
 
-import mx.com.qtx.cotizadorv1ds.persistencia.dao.ComponenteMySqlDAO;
-import mx.com.qtx.cotizadorv1ds.persistencia.dao.CotizacionMySqlDAO;
-import mx.com.qtx.cotizadorv1ds.persistencia.dao.DetCotizacionMySqlDAO;
-import mx.com.qtx.cotizadorv1ds.persistencia.dao.SubComponenteMySqlDAO;
-import mx.com.qtx.cotizadorv1ds.persistencia.dto.ComponenteDTO;
-import mx.com.qtx.cotizadorv1ds.persistencia.dto.CotizacionDTO;
-import mx.com.qtx.cotizadorv1ds.persistencia.dto.DetCotizacionDTO;
-import mx.com.qtx.cotizadorv1ds.persistencia.dto.SubComponenteDTO;
+import mx.com.qtx.cotizadorv1ds.persistencia.ComponenteMySqlDAO;
+import mx.com.qtx.cotizadorv1ds.persistencia.CotizacionMySqlDAO;
+import mx.com.qtx.cotizadorv1ds.persistencia.DetCotizacionMySqlDAO;
+import mx.com.qtx.cotizadorv1ds.persistencia.SubComponenteMySqlDAO;
+import mx.com.qtx.cotizadorv1ds.servicios.ComponenteDTO;
+import mx.com.qtx.cotizadorv1ds.servicios.CotizacionDTO;
+import mx.com.qtx.cotizadorv1ds.servicios.DetCotizacionDTO;
+import mx.com.qtx.cotizadorv1ds.servicios.SubComponenteDTO;
 
 public class DAOTest {
 	
