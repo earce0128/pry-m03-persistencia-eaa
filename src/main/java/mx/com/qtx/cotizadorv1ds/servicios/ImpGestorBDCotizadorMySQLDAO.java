@@ -14,6 +14,7 @@ import mx.com.qtx.cotizadorv1ds.core.componentes.Pc;
 import mx.com.qtx.cotizadorv1ds.core.componentes.TarjetaVideo;
 import mx.com.qtx.cotizadorv1ds.core.cotizaciones.Cotizacion;
 import mx.com.qtx.cotizadorv1ds.core.cotizaciones.DetalleCotizacion;
+import mx.com.qtx.cotizadorv1ds.core.promos.Promocion;
 import mx.com.qtx.cotizadorv1ds.persistencia.ComponenteDAO;
 import mx.com.qtx.cotizadorv1ds.persistencia.ComponenteMySqlDAO;
 import mx.com.qtx.cotizadorv1ds.persistencia.CotizacionDAO;
@@ -121,6 +122,12 @@ public class ImpGestorBDCotizadorMySQLDAO implements IGestorBDCotizador {
         									   subComp); 
             return pc;
         }
+		return null;
+	}
+	
+	@Override
+	public Promocion obtenerPromocionXId(Long numProm) throws SQLException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -236,6 +243,12 @@ public class ImpGestorBDCotizadorMySQLDAO implements IGestorBDCotizador {
                 conn.setAutoCommit(true);
             }
         }
+	}
+	
+	@Override
+	public Componente agregarPromocion(Promocion prom, Componente comp) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -563,4 +576,5 @@ public class ImpGestorBDCotizadorMySQLDAO implements IGestorBDCotizador {
         }
         return detalles;
 	}
+	
 }

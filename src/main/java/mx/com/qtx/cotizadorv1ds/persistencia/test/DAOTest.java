@@ -32,10 +32,10 @@ public class DAOTest {
     
 	
 	public static void main(String[] args) {
-//		testComponenteDAO();
-//    	testSubComponenteDAO();
-//		testCotizacionDAO();
-//    	testDetalleCotizacionDAO();
+		testComponenteDAO();
+    	testSubComponenteDAO();
+		testCotizacionDAO();
+    	testDetalleCotizacionDAO();
     	testPromocionesDAO();
 	}
 

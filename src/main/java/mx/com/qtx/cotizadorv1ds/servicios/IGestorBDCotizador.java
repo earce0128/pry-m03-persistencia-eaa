@@ -6,6 +6,7 @@ import java.util.List;
 import mx.com.qtx.cotizadorv1ds.core.componentes.Componente;
 import mx.com.qtx.cotizadorv1ds.core.cotizaciones.Cotizacion;
 import mx.com.qtx.cotizadorv1ds.core.cotizaciones.DetalleCotizacion;
+import mx.com.qtx.cotizadorv1ds.core.promos.Promocion;
 
 public interface IGestorBDCotizador {
 
@@ -14,12 +15,14 @@ public interface IGestorBDCotizador {
     Componente obtenerMonitor(String idMonitor) throws SQLException;
     Componente obtenerTarjetaVideo(String idTarjetaVideo) throws SQLException;
     Componente obtenerPC(String idPc) throws SQLException;
+    Promocion obtenerPromocionXId(Long numProm) throws SQLException;
     List<Componente> obtenerTodosComponentes() throws SQLException;
 
     Componente insertarDiscoDuro(Componente compDiscoDuro) throws SQLException;
     Componente insertarMonitor(Componente compMonitor) throws SQLException;
     Componente insertarTarjetaVideo(Componente compTarjetaVideo) throws SQLException;
     Componente insertarPC(Componente compPc) throws SQLException;
+    Componente agregarPromocion(Promocion prom, Componente comp) throws SQLException;
 
     void actualizarDiscoDuro(Componente compDiscoDuro) throws SQLException;
     void actualizarMonitor(Componente compMonitor) throws SQLException;
