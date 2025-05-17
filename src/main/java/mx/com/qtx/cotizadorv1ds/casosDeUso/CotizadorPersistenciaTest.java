@@ -32,7 +32,7 @@ public class CotizadorPersistenciaTest {
 //		testInsertarCotizacion();
 //		testActualizarCotizacion();
 //		testEliminarCotizacion();
-//    	testCotizadorPersistencia();
+    	testCotizadorPersistencia();
 		
 	}
 

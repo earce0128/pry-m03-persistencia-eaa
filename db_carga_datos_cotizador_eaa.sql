@@ -6,38 +6,62 @@ USE cotizador_eaa;
 -- DELETE FROM detalle_cotizacion;
 -- DELETE FROM sub_componente_pc;
 -- DELETE FROM componente;
+-- DELETE FROM det_promocion;
+-- DELETE FROM promocion;
+
+-- Insertar Promociones
+INSERT INTO promocion (nombre, descripcion, fechVigenciaDesde, fechVigenciaHasta) VALUES
+('2x1 + 5% + 10%','pague 1 lleve 2 + 5% adicional + 10% adicional','2025-05-10', NULL),
+('30% + 20%','30% base + 20% adicional','2025-05-1', NULL),
+('tabla dsctos A','dsctos por cantidad del 0 al 12%','2025-05-02', '2025-06-02');
+
+-- Insertar Detalle de Promociones
+INSERT INTO det_promocion (numPromocion, nombre, descripcion, esBase, llevarN, pagueM, porcDsctoPlan, tipoPromAcumulable, tipoPromBase) VALUES
+(1,'2x1','pague 1 lleve 2',1,2,1,NULL,NULL,'NXM'),
+(1,'5%','5% adicional',0,NULL,NULL,5.0,'dscto-plano',NULL),
+(1,'10%','10% adicional',0,NULL,NULL,10.0,'dscto-plano',NULL),
+(2,'30% base','30% base',0,NULL,NULL,30.0,'dscto-plano',NULL),
+(2,'20% adicional','20% adicional',0,NULL,NULL,30.0,'dscto-plano',NULL),
+(3,'rango dsctos A','dsctos variables por rango',0,NULL,NULL,NULL,'dscto-cantidad',NULL);
+
+-- Insertar Detalle de Promociones por cantidad
+INSERT INTO det_prom_dscto_x_cant (numDetPromocion, numPromocion, cantidad, dscto) VALUES
+(6,3,0,0.0),
+(6,3,3,5.0),
+(6,3,6,10.0),
+(6,3,9,12.0);
 
 -- Insertar Componentes (Monitores)
-INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo) VALUES
-('MON-0001', 'Monitor', 'Monitor LED 24 pulgadas', NULL, NULL, 150.00, 250.00, 'Samsung', 'S24F350'),
-('MON-0002', 'Monitor', 'Monitor IPS 27 pulgadas', NULL, NULL, 220.00, 350.00, 'LG', '27MK400H'),
-('MON-0003', 'Monitor', 'Monitor Curvo 32 pulgadas', NULL, NULL, 350.00, 500.00, 'Acer', 'ED320QR'),
-('MON-0004', 'Monitor', 'Monitor 4K 27 pulgadas', NULL, NULL, 300.00, 450.00, 'Dell', 'S2721QS'),
-('MON-0005', 'Monitor', 'Monitor Ultrawide 34 pulgadas', NULL, NULL, 450.00, 650.00, 'Xiaomi', 'Mi Curved 34');
+INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo, numPromocion) VALUES
+('MON-0001', 'Monitor', 'Monitor LED 24 pulgadas', NULL, NULL, 150.00, 250.00, 'Samsung', 'S24F350', NULL),
+('MON-0002', 'Monitor', 'Monitor IPS 27 pulgadas', NULL, NULL, 220.00, 350.00, 'LG', '27MK400H',NULL),
+('MON-0003', 'Monitor', 'Monitor Curvo 32 pulgadas', NULL, NULL, 350.00, 500.00, 'Acer', 'ED320QR',NULL),
+('MON-0004', 'Monitor', 'Monitor 4K 27 pulgadas', NULL, NULL, 300.00, 450.00, 'Dell', 'S2721QS',NULL),
+('MON-0005', 'Monitor', 'Monitor Ultrawide 34 pulgadas', NULL, NULL, 450.00, 650.00, 'Xiaomi', 'Mi Curved 34',NULL);
 
 -- Insertar Componentes (Tarjetas de Video)
-INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo) VALUES
-('TVID-0001', 'Tarjeta de Video', 'NVIDIA GeForce RTX 3060 12GB', '12GB GDDR6', NULL, 300.00, 450.00, 'NVIDIA', 'RTX 3060'),
-('TVID-0002', 'Tarjeta de Video', 'AMD Radeon RX 6700 XT 12GB', '12GB GDDR6', NULL, 350.00, 520.00, 'AMD', 'RX 6700 XT'),
-('TVID-0003', 'Tarjeta de Video', 'NVIDIA GeForce RTX 3070 8GB', '8GB GDDR6', NULL, 450.00, 680.00, 'ASUS', 'ROG Strix RTX 3070'),
-('TVID-0004', 'Tarjeta de Video', 'AMD Radeon RX 6600 8GB', '8GB GDDR6', NULL, 250.00, 380.00, 'MSI', 'RX 6600 MECH 2X'),
-('TVID-0005', 'Tarjeta de Video', 'NVIDIA GeForce RTX 3050 8GB', '8GB GDDR6', NULL, 200.00, 300.00, 'Gigabyte', 'RTX 3050 Eagle');
+INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo, numPromocion) VALUES
+('TVID-0001', 'Tarjeta de Video', 'NVIDIA GeForce RTX 3060 12GB', '12GB GDDR6', NULL, 300.00, 450.00, 'NVIDIA', 'RTX 3060', NULL),
+('TVID-0002', 'Tarjeta de Video', 'AMD Radeon RX 6700 XT 12GB', '12GB GDDR6', NULL, 350.00, 520.00, 'AMD', 'RX 6700 XT', NULL),
+('TVID-0003', 'Tarjeta de Video', 'NVIDIA GeForce RTX 3070 8GB', '8GB GDDR6', NULL, 450.00, 680.00, 'ASUS', 'ROG Strix RTX 3070', NULL),
+('TVID-0004', 'Tarjeta de Video', 'AMD Radeon RX 6600 8GB', '8GB GDDR6', NULL, 250.00, 380.00, 'MSI', 'RX 6600 MECH 2X', NULL),
+('TVID-0005', 'Tarjeta de Video', 'NVIDIA GeForce RTX 3050 8GB', '8GB GDDR6', NULL, 200.00, 300.00, 'Gigabyte', 'RTX 3050 Eagle', NULL);
 
 -- Insertar Componentes (Discos Duros)
-INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo) VALUES
-('DD-0001', 'Disco Duro', 'SSD 500GB NVMe', NULL, '500GB', 60.00, 100.00, 'Samsung', '970 EVO Plus 500GB'),
-('DD-0002', 'Disco Duro', 'SSD 1TB SATA', NULL, '1TB', 80.00, 130.00, 'Crucial', 'MX500 1TB'),
-('DD-0003', 'Disco Duro', 'HDD 2TB 7200RPM', NULL, '2TB', 50.00, 80.00, 'Seagate', 'Barracuda 2TB'),
-('DD-0004', 'Disco Duro', 'SSD 250GB NVMe', NULL, '250GB', 40.00, 70.00, 'Western Digital', 'WD Blue SN570 250GB'),
-('DD-0005', 'Disco Duro', 'SSD 1TB NVMe Gen4', NULL, '1TB', 120.00, 180.00, 'Kingston', 'KC3000 1TB');
+INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo, numPromocion) VALUES
+('DD-0001', 'Disco Duro', 'SSD 500GB NVMe', NULL, '500GB', 60.00, 100.00, 'Samsung', '970 EVO Plus 500GB', NULL),
+('DD-0002', 'Disco Duro', 'SSD 1TB SATA', NULL, '1TB', 80.00, 130.00, 'Crucial', 'MX500 1TB', NULL),
+('DD-0003', 'Disco Duro', 'HDD 2TB 7200RPM', NULL, '2TB', 50.00, 80.00, 'Seagate', 'Barracuda 2TB', NULL),
+('DD-0004', 'Disco Duro', 'SSD 250GB NVMe', NULL, '250GB', 40.00, 70.00, 'Western Digital', 'WD Blue SN570 250GB', NULL),
+('DD-0005', 'Disco Duro', 'SSD 1TB NVMe Gen4', NULL, '1TB', 120.00, 180.00, 'Kingston', 'KC3000 1TB', NULL);
 
 -- Insertar Componentes (PCs)
-INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo) VALUES
-('PC-0001', 'PC', 'PC Gamer Ryzen 5, RTX 3060', NULL, NULL, 800.00, 1200.00, 'Armada', 'Gamer Pro'),
-('PC-0002', 'PC', 'PC Oficina Intel i5, Integrada', NULL, NULL, 500.00, 800.00, 'OfficeMax', 'Essential'),
-('PC-0003', 'PC', 'Workstation Intel Xeon, Quadro', NULL, NULL, 1500.00, 2500.00, 'PowerTech', 'Workstation X'),
-('PC-0004', 'PC', 'PC Media Center AMD Ryzen 3, Integrada', NULL, NULL, 400.00, 650.00, 'HomeSys', 'Media Hub'),
-('PC-0005', 'PC', 'PC Edición Intel i7, RTX 3070', NULL, NULL, 1200.00, 1800.00, 'Creative', 'Edit Pro');
+INSERT INTO componente (idComponente, categoria, descripcion, memoria, capAlmacenamiento, costo, precioBase, marca, modelo, numPromocion) VALUES
+('PC-0001', 'PC', 'PC Gamer Ryzen 5, RTX 3060', NULL, NULL, 800.00, 1200.00, 'Armada', 'Gamer Pro', NULL),
+('PC-0002', 'PC', 'PC Oficina Intel i5, Integrada', NULL, NULL, 500.00, 800.00, 'OfficeMax', 'Essential', NULL),
+('PC-0003', 'PC', 'Workstation Intel Xeon, Quadro', NULL, NULL, 1500.00, 2500.00, 'PowerTech', 'Workstation X', NULL),
+('PC-0004', 'PC', 'PC Media Center AMD Ryzen 3, Integrada', NULL, NULL, 400.00, 650.00, 'HomeSys', 'Media Hub', NULL),
+('PC-0005', 'PC', 'PC Edición Intel i7, RTX 3070', NULL, NULL, 1200.00, 1800.00, 'Creative', 'Edit Pro',NULL);
 
 -- Insertar SubComponentes para PC-0001
 INSERT INTO sub_componente_pc (idPC, idSubComponente, cantidad) VALUES

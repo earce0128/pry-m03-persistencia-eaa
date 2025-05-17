@@ -2,6 +2,40 @@ DROP DATABASE IF EXISTS cotizador_eaa;
 CREATE DATABASE cotizador_eaa;
 USE cotizador_eaa;
 
+CREATE TABLE promocion (
+    numPromocion BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50),
+    descripcion TEXT,
+    fechVigenciaDesde DATE NOT NULL,
+    fechVigenciaHasta DATE
+);
+
+CREATE TABLE det_promocion (
+    numDetPromocion BIGINT UNSIGNED AUTO_INCREMENT,
+    numPromocion BIGINT UNSIGNED,
+    nombre VARCHAR(50),
+    descripcion TEXT,
+    esBase BOOLEAN,
+    llevarN INT UNSIGNED,
+    pagueM INT UNSIGNED,
+    porcDsctoPlan DECIMAL(5, 2),
+    tipoPromAcumulable VARCHAR(50),
+    tipoPromBase VARCHAR(50),
+    PRIMARY KEY (numDetPromocion, numPromocion),
+    FOREIGN KEY (numPromocion) REFERENCES promocion(numPromocion) ON DELETE CASCADE,
+    CONSTRAINT uc_nombre UNIQUE (nombre)
+);
+
+CREATE TABLE det_prom_dscto_x_cant (
+    numPromDsctoCant BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    numDetPromocion BIGINT UNSIGNED,
+    numPromocion BIGINT UNSIGNED,
+    cantidad INT UNSIGNED,
+    dscto DECIMAL(5, 2),
+    FOREIGN KEY (numDetPromocion, numPromocion) REFERENCES det_promocion(numDetPromocion, numPromocion) ON DELETE CASCADE,
+    CONSTRAINT uc_numPromCant_numDetProm_numProm UNIQUE (numPromDsctoCant, numDetPromocion, numPromocion)
+);
+
 CREATE TABLE componente (
     idComponente VARCHAR(15) PRIMARY KEY,
     categoria VARCHAR(50),
@@ -12,6 +46,8 @@ CREATE TABLE componente (
     precioBase DECIMAL(10, 2),
     marca VARCHAR(50),
     modelo VARCHAR(50),
+    numPromocion BIGINT UNSIGNED,
+    FOREIGN KEY (numPromocion) REFERENCES promocion(numPromocion) ON DELETE SET NULL,
     CONSTRAINT uc_marca_modelo UNIQUE (marca, modelo)
 );
 
