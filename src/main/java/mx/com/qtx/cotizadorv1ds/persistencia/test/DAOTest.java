@@ -7,10 +7,16 @@ import java.util.List;
 import mx.com.qtx.cotizadorv1ds.persistencia.ComponenteMySqlDAO;
 import mx.com.qtx.cotizadorv1ds.persistencia.CotizacionMySqlDAO;
 import mx.com.qtx.cotizadorv1ds.persistencia.DetCotizacionMySqlDAO;
+import mx.com.qtx.cotizadorv1ds.persistencia.DetPromDsctoXCantMySqlDAO;
+import mx.com.qtx.cotizadorv1ds.persistencia.DetPromocionMySqlDAO;
+import mx.com.qtx.cotizadorv1ds.persistencia.PromocionMySqlDAO;
 import mx.com.qtx.cotizadorv1ds.persistencia.SubComponenteMySqlDAO;
 import mx.com.qtx.cotizadorv1ds.servicios.ComponenteDTO;
 import mx.com.qtx.cotizadorv1ds.servicios.CotizacionDTO;
 import mx.com.qtx.cotizadorv1ds.servicios.DetCotizacionDTO;
+import mx.com.qtx.cotizadorv1ds.servicios.DetPromDsctoXCantDTO;
+import mx.com.qtx.cotizadorv1ds.servicios.DetPromocionDTO;
+import mx.com.qtx.cotizadorv1ds.servicios.PromocionDTO;
 import mx.com.qtx.cotizadorv1ds.servicios.SubComponenteDTO;
 
 public class DAOTest {
@@ -20,12 +26,54 @@ public class DAOTest {
     static DetCotizacionMySqlDAO detCotizacionDAO = DetCotizacionMySqlDAO.getInstance();
     static ComponenteMySqlDAO componenteDAO = ComponenteMySqlDAO.getInstance();
     static SubComponenteMySqlDAO subComponenteDAO = SubComponenteMySqlDAO.getInstance();
+    static PromocionMySqlDAO promocionDAO = PromocionMySqlDAO.getInstance();
+    static DetPromocionMySqlDAO detPromocionDAO = DetPromocionMySqlDAO.getInstance();
+    static DetPromDsctoXCantMySqlDAO detPromDsctoCantDAO = DetPromDsctoXCantMySqlDAO.getInstance();
+    
 	
 	public static void main(String[] args) {
-		testComponenteDAO();
-    	testSubComponenteDAO();
-		testCotizacionDAO();
-    	testDetalleCotizacionDAO();
+//		testComponenteDAO();
+//    	testSubComponenteDAO();
+//		testCotizacionDAO();
+//    	testDetalleCotizacionDAO();
+    	testPromocionesDAO();
+	}
+
+	private static void testPromocionesDAO() {
+		try {
+			System.out.println("\n--- Pruebas de PromocionDAO ---");
+
+	        // Obtener la promocion
+	        PromocionDTO promocionObtenida = promocionDAO.obtener(3L);
+	        System.out.println("Promocion obtenida: =" + promocionObtenida);
+	        
+	        // Obtener todos los detalles por promocion
+            List<DetPromocionDTO> detallesPorPromocion = detPromocionDAO.obtenerTodosPorPromocion(promocionObtenida.getNumPromocion());
+            for(DetPromocionDTO detProm : detallesPorPromocion) {
+            	System.out.println(detProm);
+            }
+            
+            // Obtener todos los detalles de promocion
+            List<DetPromocionDTO> detallesPromocion = detPromocionDAO.obtenerTodos();
+            for(DetPromocionDTO detProm : detallesPromocion) {
+            	System.out.println(detProm);
+            }
+            
+            // Obtener todos los detalles dscto por cantidad
+            List<DetPromDsctoXCantDTO> detallesPromDsctoCant = detPromDsctoCantDAO.obtenerPorDetProm(6L, 3L);
+            for(DetPromDsctoXCantDTO detPromDscto : detallesPromDsctoCant) {
+            	System.out.println(detPromDscto);
+            }
+            
+            
+
+	        System.out.println("\n--- Pruebas completadas ---");
+
+	    } catch (SQLException e) {
+	        System.err.println("Error durante las pruebas de DAO: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+		
 	}
 
 	private static void testSubComponenteDAO() {
